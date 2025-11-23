@@ -1,6 +1,5 @@
 """
 File Automasi Preprocessing Data
-Untuk Kriteria 1 - Skilled Level
 
 File ini mengotomatisasi seluruh proses preprocessing yang telah
 dilakukan pada notebook eksperimen.
@@ -54,7 +53,7 @@ class DataPreprocessor:
         """
         print(f"Loading data dari {filepath}...")
         df = pd.read_csv(filepath)
-        print(f"✓ Data dimuat: {df.shape[0]} baris, {df.shape[1]} kolom")
+        print(f" Data dimuat: {df.shape[0]} baris, {df.shape[1]} kolom")
         return df
     
     def identify_column_types(self, df):
@@ -75,8 +74,8 @@ class DataPreprocessor:
         if self.target_column in self.categorical_cols:
             self.categorical_cols.remove(self.target_column)
             
-        print(f"✓ Kolom numerik: {len(self.numeric_cols)}")
-        print(f"✓ Kolom kategorikal: {len(self.categorical_cols)}")
+        print(f" Kolom numerik: {len(self.numeric_cols)}")
+        print(f" Kolom kategorikal: {len(self.categorical_cols)}")
     
     def handle_missing_values(self, df):
         """
@@ -101,7 +100,7 @@ class DataPreprocessor:
             df_clean[numeric_cols_with_missing] = self.imputer_numeric.fit_transform(
                 df_clean[numeric_cols_with_missing]
             )
-            print(f"✓ Missing values pada {len(numeric_cols_with_missing)} kolom numerik diisi dengan median")
+            print(f" Missing values pada {len(numeric_cols_with_missing)} kolom numerik diisi dengan median")
         
         # Handle categorical columns
         categorical_cols_with_missing = [col for col in self.categorical_cols if df_clean[col].isnull().any()]
@@ -109,9 +108,9 @@ class DataPreprocessor:
             df_clean[categorical_cols_with_missing] = self.imputer_categorical.fit_transform(
                 df_clean[categorical_cols_with_missing]
             )
-            print(f"✓ Missing values pada {len(categorical_cols_with_missing)} kolom kategorikal diisi dengan modus")
+            print(f" Missing values pada {len(categorical_cols_with_missing)} kolom kategorikal diisi dengan modus")
         
-        print(f"✓ Total missing values: {df_clean.isnull().sum().sum()}")
+        print(f" Total missing values: {df_clean.isnull().sum().sum()}")
         return df_clean
     
     def remove_outliers(self, df, columns=None):
@@ -146,8 +145,8 @@ class DataPreprocessor:
             df_clean = df_clean[(df_clean[col] >= lower_bound) & (df_clean[col] <= upper_bound)]
         
         removed_rows = initial_rows - len(df_clean)
-        print(f"✓ {removed_rows} baris outliers dihapus")
-        print(f"✓ Data tersisa: {len(df_clean)} baris")
+        print(f" {removed_rows} baris outliers dihapus")
+        print(f" Data tersisa: {len(df_clean)} baris")
         
         return df_clean
     
@@ -172,7 +171,7 @@ class DataPreprocessor:
             le = LabelEncoder()
             df_encoded[col] = le.fit_transform(df_encoded[col].astype(str))
             self.label_encoders[col] = le
-            print(f"✓ {col} di-encode ({len(le.classes_)} kategori)")
+            print(f" {col} di-encode ({len(le.classes_)} kategori)")
         
         return df_encoded
     
@@ -196,7 +195,7 @@ class DataPreprocessor:
             columns=X.columns,
             index=X.index
         )
-        print(f"✓ {X_scaled.shape[1]} features di-scale")
+        print(f" {X_scaled.shape[1]} features di-scale")
         
         return X_scaled
     
@@ -226,13 +225,13 @@ class DataPreprocessor:
             X_train, X_test, y_train, y_test = train_test_split(
                 X, y, test_size=test_size, random_state=random_state, stratify=y
             )
-            print(f"✓ Data training: {X_train.shape[0]} samples")
-            print(f"✓ Data testing: {X_test.shape[0]} samples")
+            print(f" Data training: {X_train.shape[0]} samples")
+            print(f" Data testing: {X_test.shape[0]} samples")
             return X_train, X_test, y_train, y_test
         else:
             X_train, X_test = train_test_split(X, test_size=test_size, random_state=random_state)
-            print(f"✓ Data training: {X_train.shape[0]} samples")
-            print(f"✓ Data testing: {X_test.shape[0]} samples")
+            print(f" Data training: {X_train.shape[0]} samples")
+            print(f" Data testing: {X_test.shape[0]} samples")
             return X_train, X_test, None, None
     
     def save_processed_data(self, X_train, X_test, y_train=None, y_test=None, output_dir='preprocessing/dataset_preprocessing'):
@@ -268,8 +267,8 @@ class DataPreprocessor:
         train_data.to_csv(train_path, index=False)
         test_data.to_csv(test_path, index=False)
         
-        print(f"✓ train_data.csv: {train_data.shape}")
-        print(f"✓ test_data.csv: {test_data.shape}")
+        print(f" train_data.csv: {train_data.shape}")
+        print(f" test_data.csv: {test_data.shape}")
     
     def preprocess(self, filepath, remove_outliers_cols=None, output_dir='preprocessing/dataset_preprocessing'):
         """
