@@ -1,0 +1,54 @@
+name: Preprocessing Workflow
+
+# Trigger workflow
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'dataset_raw/**'
+      - 'automate_*.py'
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  preprocess-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pandas numpy scikit-learn matplotlib seaborn
+    
+    - name: Create preprocessing directory
+      run: |
+        mkdir -p preprocessing/dataset_preprocessing
+    
+    - name: Run preprocessing
+      run: |
+        python Automate_AryaMaulana.py
+    
+    - name: Commit and push preprocessed data
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add preprocessing/dataset_preprocessing/
+        git diff --quiet && git diff --staged --quiet || git commit -m "Auto: Update preprocessed data [skip ci]"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Upload preprocessed data as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: preprocessed-data
+        path: preprocessing/dataset_preprocessing/
+        retention-days: 30
