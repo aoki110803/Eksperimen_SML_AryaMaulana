@@ -289,9 +289,8 @@ class DataPreprocessor:
         X_train, X_test, y_train, y_test : DataFrames/Series
             Data yang sudah diproses
         """
-        print("="*60)
+
         print("MEMULAI PREPROCESSING OTOMATIS")
-        print("="*60)
         
         # 1. Load data
         df = self.load_data(filepath)
@@ -328,7 +327,7 @@ class DataPreprocessor:
         
         print("\n" + "="*60)
         print("PREPROCESSING SELESAI!")
-        print("="*60)
+
         
         return X_train, X_test, y_train, y_test
 
@@ -338,8 +337,8 @@ def main():
     Fungsi utama untuk menjalankan preprocessing
     """
     # Konfigurasi
-    RAW_DATA_PATH = 'dataset_raw/your_data.csv'
-    TARGET_COLUMN = 'target'  # Ganti dengan nama kolom target Anda
+    RAW_DATA_PATH = 'dataset_raw/diabetes.csv'
+    TARGET_COLUMN = 'Target'  # Ganti dengan nama kolom target Anda
     OUTPUT_DIR = 'preprocessing/dataset_preprocessing'
     
     # Kolom yang ingin dibersihkan dari outliers (opsional)
