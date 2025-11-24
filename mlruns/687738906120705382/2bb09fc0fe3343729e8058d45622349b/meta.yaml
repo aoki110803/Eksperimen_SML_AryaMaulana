@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/687738906120705382/2bb09fc0fe3343729e8058d45622349b/artifacts
+end_time: 1763950469741
+entry_point_name: ''
+experiment_id: '687738906120705382'
+lifecycle_stage: active
+run_id: 2bb09fc0fe3343729e8058d45622349b
+run_name: RandomForest_Regression
+run_uuid: 2bb09fc0fe3343729e8058d45622349b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763950458212
+status: 3
+tags: []
+user_id: aabdu

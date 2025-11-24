@@ -1,0 +1,12 @@
+{
+    "model_type": "RandomForest",
+    "best_params": {
+        "max_depth": 5,
+        "min_samples_leaf": 4,
+        "min_samples_split": 10,
+        "n_estimators": 100
+    },
+    "n_features": 8,
+    "n_training_samples": 511,
+    "n_testing_samples": 128
+}
