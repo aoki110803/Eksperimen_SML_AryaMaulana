@@ -1,0 +1,4 @@
+[dagshub]
+repo_owner = aryamaulana110803
+repo_name = Eksperimen_SML_AryaMaulana
+mlflow = true

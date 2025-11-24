@@ -55,8 +55,8 @@ def train_with_tuning_and_manual_logging(X_train, X_test, y_train, y_test,
         try:
             import dagshub
             dagshub.init(
-                repo_owner='aryamaulana110803',  # Sesuai dengan username GitHub Anda
-                repo_name='Eksperimen_SML_AryaMaulana',  # Sesuai dengan repo name
+                repo_owner='aryamaulana110803',
+                repo_name='Eksperimen_SML_AryaMaulana', 
                 mlflow=True
             )
             print(" DagsHub initialized successfully")
